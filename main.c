@@ -147,16 +147,63 @@ void alterarCor()
     W(2, 0, blue, 8);
 }
 
+// funcao antiga:
+
+// void alterarTexto()
+// {
+//     char texto[24];
+    
+//     printf("Digite o texto que deseja exibir(limite de 24 caracteres):\n");
+
+//     scanf("%s", texto);
+
+//     changeString(texto);
+// }
+
+// tentar funcao nova:
+
 void alterarTexto()
 {
-    char texto[24];
-    
-    printf("Digite o texto que deseja exibir(limite de 24 caracteres):\n");
+    char texto[25]; // 24 caracteres + 1 para o terminador nulo
 
-    scanf("%s", texto);
+    printf("Digite o texto que deseja exibir (limite de 24 caracteres):\n");
+
+    // Clear the input buffer to avoid reading the newline character left by previous scanf
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+
+    // Use fgets to read the entire line, including spaces
+    fgets(texto, sizeof(texto), stdin);
+
+    // Remove the newline character if it is present
+    size_t length = strlen(texto);
+    if (length > 0 && texto[length - 1] == '\n') {
+        texto[length - 1] = '\0';
+    }
 
     changeString(texto);
 }
+
+// se nao funcionar, tentar:
+
+// void alterarTexto()
+// {
+//     char texto[25]; // 24 caracteres + 1 para o terminador nulo
+
+//     printf("Digite o texto que deseja exibir (limite de 24 caracteres):\n");
+
+//     // Use fgets to read the entire line, including spaces
+//     fgets(texto, sizeof(texto), stdin);
+
+//     // Remove the newline character if it is present
+//     size_t length = strlen(texto);
+//     if (length > 0 && texto[length - 1] == '\n') {
+//         texto[length - 1] = '\0';
+//     }
+
+//     changeString(texto);
+// }
+
 
 void atualizarLedBateria()
 {
